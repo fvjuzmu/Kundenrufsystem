@@ -78,3 +78,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# dont accidently push your local config file
+config/db.conf.php
