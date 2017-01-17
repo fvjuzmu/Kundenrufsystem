@@ -2,7 +2,7 @@
 $debug = 0;
 global $debug;
 
-if( array_key_exists('dbg', $_REQUEST) )
+if( array_key_exists('debug', $_REQUEST) )
 {
     $debug = 1;
     ini_set('xdebug.collect_vars', 'on');
