@@ -1,0 +1,30 @@
+.row {
+    text-align: center;
+}
+.row:after {
+    display: inline-block;
+    content: "";
+    width: 100%;
+}
+
+.element-wrapper {
+    /*display: table-cell;*/
+    vertical-align: top;
+    display: inline-block;
+    min-width: 23%;
+    text-align: center;
+    margin: 10px 0;
+}
+.krsButton {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    background: whitesmoke;
+    color: black;
+    min-width: 200px;
+}
+
+.krsButtonRed
+{
+    background-color: red;
+}

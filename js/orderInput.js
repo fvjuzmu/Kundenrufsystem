@@ -7,7 +7,7 @@ function displayMessage(notifications) {
         case "erfolg":
             msg = "<span style='color: darkgreen'>";
             break;
-    }
+    }type
 
     msg += notifications.type + ": " + notifications.message + "</span>";
     $('#message').html(msg);
@@ -17,7 +17,7 @@ function addToOrderList(orderID) {
 
     var date = new Date();
     var newOrderListItem = document.createElement("li");
-    newOrderListItem.innerHTML = "<b>" + orderID + "</b> - " + +date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    newOrderListItem.innerHTML = "<b>" + orderID + "</b> - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     $('#orderList').prepend(newOrderListItem);
 
     if ($('#orderList li').length > 10) {
