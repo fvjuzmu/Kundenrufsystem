@@ -24,7 +24,25 @@
     min-width: 200px;
 }
 
+.krsButtonOrderID
+{
+	font-size:22pt;
+}
+
 .krsButtonRed
 {
     background-color: red;
+}
+
+#orderID
+{
+	font-size: 24px;
+	font-weight: bold;
+	
+}
+
+.indexLink
+{
+    font-weight: bold;
+    font-size: 4rem;
 }

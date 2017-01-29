@@ -7,7 +7,7 @@ function displayMessage(notifications) {
         case "erfolg":
             msg = "<span style='color: darkgreen'>";
             break;
-    }type
+    }
 
     msg += notifications.type + ": " + notifications.message + "</span>";
     $('#message').html(msg);
@@ -47,7 +47,7 @@ function newOrderID(keyPress) {
         'debug': debug
     };
 
-    $.post("http://127.0.0.1/krs/api/saveNewOrder.php", postData, function (returnData) {
+    $.post("http://" + server + "/krs/api/saveNewOrder.php", postData, function (returnData) {
 
         if (returnData.hasOwnProperty("success")) {
 
@@ -57,6 +57,7 @@ function newOrderID(keyPress) {
             });
 
             addToOrderList($('#orderID').val());
+            $('#orderID').val("");
 
         } else if (returnData.hasOwnProperty("notifications")) {
             displayMessage(returnData.notifications[0]);

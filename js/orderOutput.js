@@ -1,5 +1,4 @@
-function displayMessage(notifications)
-{
+function displayMessage(notifications) {
     var msg;
     switch (notifications.type.toLowerCase()) {
         case "error":
@@ -14,19 +13,16 @@ function displayMessage(notifications)
     $('#message').html(msg);
 }
 
-function displayOrders(openOrders)
-{
+function displayOrders(openOrders) {
     var date = new Date();
 
-    for(var buttonCount = 0; buttonCount < $('.krsButton').length; buttonCount++)
-    {
-        if(typeof(openOrders[buttonCount]) === "undefined")
-        {
+    for (var buttonCount = 0; buttonCount < $('.krsButton').length; buttonCount++) {
+        if (typeof(openOrders[buttonCount]) === "undefined") {
             hideButton(buttonCount);
-            $('#button'+buttonCount).val('');
-            $('#button'+buttonCount).html('');
-            $('#button'+buttonCount).removeClass('krsButtonRed');
-            $('#button'+buttonCount).removeClass('overdue');
+            $('#button' + buttonCount).val('');
+            $('#button' + buttonCount).html('');
+            $('#button' + buttonCount).removeClass('krsButtonRed');
+            $('#button' + buttonCount).removeClass('overdue');
             continue;
         }
 
@@ -35,11 +31,10 @@ function displayOrders(openOrders)
         var timer = new Date(date - begin);
         $('#button' + buttonCount).html("<b class='krsButtonOrderID'>" + openOrders[buttonCount].nr + "</b><br>(" + timer.getMinutes() + ":" + timer.getSeconds() + ")");
         $('#button' + buttonCount).val(openOrders[buttonCount].nr);
-        if(timer.getMinutes() > 3 && !$('#button' + buttonCount).hasClass("overdue")) {
+        if (timer.getMinutes() > 3 && !$('#button' + buttonCount).hasClass("overdue")) {
             $('#button' + buttonCount).addClass("krsButtonRed");
             $('#button' + buttonCount).addClass("overdue");
-        }else if(timer.getMinutes() <= 3 && $('#button' + buttonCount).hasClass("overdue"))
-        {
+        } else if (timer.getMinutes() <= 3 && $('#button' + buttonCount).hasClass("overdue")) {
             $('#button' + buttonCount).removeClass("krsButtonRed");
             $('#button' + buttonCount).removeClass("overdue");
         }
@@ -47,39 +42,33 @@ function displayOrders(openOrders)
     }
 }
 
-function loadOrders()
-{
-    $.ajax("http://127.0.0.1/krs/api/getReadyOrders.php")
-        .done(function (returnData)
-        {
+function loadOrders() {
+    $.ajax("http://10.0.1.30/krs/api/getReadyOrders.php")
+        .done(function (returnData) {
             displayOrders(returnData);
 
-        }).fail(function (returnData)
-    {
+        }).fail(function (returnData) {
         displayMessage(returnData.notifications[0]);
     }).always(function () {
 
     });
 }
 
-function showButton(buttonID)
-{
-    $('#button'+buttonID).show();
+function showButton(buttonID) {
+    $('#button' + buttonID).show();
 }
 
-function hideButton(buttonID)
-{
-    $('#button'+buttonID).hide();
+function hideButton(buttonID) {
+    $('#button' + buttonID).hide();
 }
 
-function removeOrder(orderID)
-{
+function removeOrder(orderID) {
     var postData = {
         'orderID': orderID,
         'debug': debug
     };
 
-    $.post("http://127.0.0.1/krs/api/removeOrder.php", postData, function (returnData) {
+    $.post("http://" + server + "/krs/api/removeOrder.php", postData, function (returnData) {
 
         if (returnData.hasOwnProperty("success")) {
 
@@ -97,23 +86,22 @@ function removeOrder(orderID)
     });
 }
 
-function blink(selector){
-    selector.fadeOut('slow', function(){
-        $(this).fadeIn('slow', function(){
+function blink(selector) {
+    selector.fadeOut('slow', function () {
+        $(this).fadeIn('slow', function () {
             blink(this);
         });
     });
 }
 
-function classToggle()
-{
+function classToggle() {
     $('.overdue').toggleClass('krsButtonRed');
 }
 
 $(document).ready(function () {
     debug = false;
 
-    $('.krsButton').on('click', function(){
+    $('.krsButton').on('click', function () {
         removeOrder($(this).val());
     })
     loadOrders();
