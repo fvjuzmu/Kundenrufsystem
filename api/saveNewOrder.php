@@ -9,7 +9,14 @@ if($_REQUEST['debug'] == "true")
 }
 
 $dbh = new \FVJUZ\Kundenrufsystem\DatabaseHandler();
-$sql = 'INSERT INTO krs.order (nr, begin) VALUES ('.$_REQUEST['orderID'].', NOW())';
+if((int)$_REQUEST['orderID'] < 0)
+{
+    $order_nr = (int)$_REQUEST['orderID'] * -1;
+    $sql = 'DELETE FROM krs.order WHERE nr = '.$order_nr;
+}else{
+    $sql = 'INSERT INTO krs.order (nr, begin) VALUES ('.$_REQUEST['orderID'].', NOW())';
+}
+
 try {
    $dbh->executeStatement($sql);
 

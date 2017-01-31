@@ -34,6 +34,26 @@
     background-color: red;
 }
 
+#orderListScreen
+{
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    margin-left: 6em;
+}
+
+#orderListScreen li
+{
+    font-size: 6em;
+    list-style: circle;
+}
+
+.krsLabelRed
+{
+    color: red;
+    list-style: disc !important;
+}
+
 #orderID
 {
 	font-size: 24px;

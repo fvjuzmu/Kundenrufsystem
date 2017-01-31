@@ -10,5 +10,8 @@
 <br>
 <br>
 <a href="/krs/ausgabe.php" class="indexLink">AUSGABE</a>
+<br>
+<br>
+<a href="/krs/anzeige.php" class="indexLink">ANZEIGE</a>
 </body>
 </html>

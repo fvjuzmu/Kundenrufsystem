@@ -8,7 +8,6 @@ function displayMessage(notifications) {
             msg = "<span style='color: darkgreen'>";
             break;
     }
-
     msg += notifications.type + ": " + notifications.message + "</span>";
     $('#message').html(msg);
 }
@@ -34,11 +33,19 @@ function newOrderID(keyPress) {
         return;
     }
 
-    if (keyPress.which < 48 || keyPress.which > 57) {
+    if ((keyPress.which < 48 || keyPress.which > 57) && keyPress.which != 45) {
         keyPress.preventDefault();
     }
 
     if (keyPress.which != 13) {
+        return;
+    }
+
+    if ($('#orderID').val().length == 0) {
+        return;
+    }
+
+    if ($('#orderID').val() < 1 || $('#orderID').val() > 9999) {
         return;
     }
 

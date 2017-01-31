@@ -24,8 +24,21 @@ function convertExceptionIntoNotification($exception)
  */
 function newNotification($type, $message)
 {
-    $notification[ "type" ] = $type;
-    $notification[ "message" ] = $message;
+    $notification["type"] = $type;
+    $notification["message"] = $message;
 
-    return json_encode([ "notifications" => [ $notification ] ]);
+    return json_encode(["notifications" => [$notification]]);
+}
+
+function compare_nr($a, $b)
+{
+    if ($a['nr'] == $b['nr']) {
+        return 0;
+    }
+
+    if ($a['nr'] < $b['nr']) {
+        return -1;
+    } else {
+        return 1;
+    }
 }

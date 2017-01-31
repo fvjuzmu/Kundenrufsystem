@@ -43,7 +43,7 @@ function displayOrders(openOrders) {
 }
 
 function loadOrders() {
-    $.ajax("http://10.0.1.30/krs/api/getReadyOrders.php")
+    $.ajax("http://" + server + "/krs/api/getReadyOrders.php")
         .done(function (returnData) {
             displayOrders(returnData);
 
@@ -63,6 +63,10 @@ function hideButton(buttonID) {
 }
 
 function removeOrder(orderID) {
+    if (confirm("Bestellung: "+orderID+" löschen?") != true) {
+        return;
+    }
+
     var postData = {
         'orderID': orderID,
         'debug': debug
