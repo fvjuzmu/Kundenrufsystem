@@ -110,6 +110,6 @@ $(document).ready(function () {
     })
     loadOrders();
     setInterval(classToggle, 1000);
-    setInterval(loadOrders, 4000);
+    setInterval(loadOrders, 2000);
 
 });

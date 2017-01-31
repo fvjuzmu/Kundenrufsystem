@@ -15,7 +15,7 @@ function addToOrderList(orderID, minutes) {
 
     var newOrderListItem = document.createElement("li");
     newOrderListItem.innerHTML = orderID;
-    newOrderListItem
+
     if (minutes > 3)
     {
         newOrderListItem.className += " krsLabelRed"
@@ -26,9 +26,10 @@ function addToOrderList(orderID, minutes) {
 }
 
 function loadOrders() {
-    $('#orderListScreen').empty();
+
     $.ajax("http://" + server + "/krs/api/getReadyOrders.php")
         .done(function (returnData) {
+            $('#orderListScreen').empty();
             displayOrders(returnData);
 
         }).fail(function (returnData) {
@@ -40,10 +41,7 @@ function loadOrders() {
 $(document).ready(function () {
     debug = false;
 
-    $('.krsButton').on('click', function () {
-        removeOrder($(this).val());
-    })
     loadOrders();
-    setInterval(loadOrders, 4000);
+    setInterval(loadOrders, 1000);
 
 });
