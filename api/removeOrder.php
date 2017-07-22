@@ -1,11 +1,12 @@
 <?php
+/**
+ * "Removes" an order from the database.
+ *
+ * Actually it will write an DateTime into the end column of the db table, so the order will be not displayed
+ */
+
 require "api.php";
 require "./../class/DatabaseHandler.php";
-
-if ($_REQUEST['debug'] == "true") {
-    echo json_encode($_REQUEST);
-    die();
-}
 
 try {
     $dbh = new \FVJUZ\Kundenrufsystem\DatabaseHandler();

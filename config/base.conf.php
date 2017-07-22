@@ -1,5 +1,5 @@
 <?php
-// define the root directory from where all will start
+// define the root directory from where it all starts
 if(!defined("__ROOT__"))
 {
     define("__ROOT__", __DIR__ . '/../');

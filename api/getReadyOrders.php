@@ -1,4 +1,9 @@
 <?php
+/**
+ * Select the oldest 12 orders from the database wehre the 'end' column is null, sort them by the table column nr and
+ * return the db result array as json.
+ */
+
 require "api.php";
 require "./../class/DatabaseHandler.php";
 

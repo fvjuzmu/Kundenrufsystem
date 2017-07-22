@@ -270,7 +270,7 @@ class DatabaseHandler
      *
      * @param array $conditions array with conditions [[ column, value, operator],...]
      *
-     * @return string
+     * @return array
      */
     private function prepareWhereConditionAndParameters($conditions)
     {

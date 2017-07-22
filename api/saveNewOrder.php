@@ -1,12 +1,14 @@
 <?php
+/**
+ * Save a new order into the database. If the order id (order number) is a negative value, remove the order from the
+ * database.
+ *
+ * TODO Should it be possible to enter an order twice. Imagine the a case where the order ID roles over and begins again
+ * TODO by '1'. Maybe instead of throwing an error, whe should accept the id again an only set the 'end' column to NULL.
+ */
+
 require "api.php";
 require "./../class/DatabaseHandler.php";
-
-if($_REQUEST['debug'] == "true")
-{
-    echo json_encode($_REQUEST);
-    die();
-}
 
 $dbh = new \FVJUZ\Kundenrufsystem\DatabaseHandler();
 if((int)$_REQUEST['orderID'] < 0)

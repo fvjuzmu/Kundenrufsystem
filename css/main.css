@@ -1,6 +1,7 @@
 .row {
     text-align: center;
 }
+
 .row:after {
     display: inline-block;
     content: "";
@@ -15,6 +16,7 @@
     text-align: center;
     margin: 10px 0;
 }
+
 .krsButton {
     width: 80%;
     height: 100px;
@@ -24,36 +26,31 @@
     min-width: 200px;
 }
 
-.krsButtonOrderID
-{
-	font-size:22pt;
+.krsButtonOrderID {
+    font-size: 22pt;
 }
 
-.krsButtonRed
-{
+.krsButtonRed {
     background-color: #F44;
 }
 
-.krsLabelRed
-{
+.krsLabelRed {
     color: #C00;
     list-style: disc !important;
 }
 
-#orderID
-{
-	font-size: 24px;
-	font-weight: bold;
+#orderID {
+    font-size: 24px;
+    font-weight: bold;
     width: 300px;
 }
 
-.indexLink
-{
+.indexLink {
     font-weight: bold;
     font-size: 4rem;
 }
 
-#orderListScreen{
+#orderListScreen {
     position: relative;
     width: 100%;
     text-align: center;
@@ -65,7 +62,7 @@
     column-count: 2;
 }
 
-#orderListScreen div{
+#orderListScreen div {
     background-color: white;
 }
 

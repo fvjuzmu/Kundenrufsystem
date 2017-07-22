@@ -108,7 +108,7 @@ class Configuration
     }
 
     /**
-     * Returns the table refix for database tables
+     * Returns the table prefix for database tables
      *
      * @return string
      */
