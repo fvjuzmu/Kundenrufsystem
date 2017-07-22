@@ -1,15 +1,26 @@
 function displayMessage(notifications) {
+
     var msg;
-    switch (notifications.type.toLowerCase()) {
-        case "error":
-            msg = "<span style='color: red'>";
-            break;
-        case "erfolg":
-            msg = "<span style='color: darkgreen'>";
-            break;
+
+    if (notifications != '') {
+        $('#divErrorMsg').show();
+
+
+        switch (notifications.type.toLowerCase()) {
+            case "error":
+                msg = "<span style='color: red'>";
+                break;
+            case "erfolg":
+                msg = "<span style='color: darkgreen'>";
+                break;
+        }
+
+        msg += notifications.type + ": " + notifications.message + "</span>";
+    } else {
+        $('#divErrorMsg').hide();
+        msg = '';
     }
 
-    msg += notifications.type + ": " + notifications.message + "</span>";
     $('#message').html(msg);
 }
 
@@ -45,7 +56,12 @@ function displayOrders(openOrders) {
 function loadOrders() {
     $.ajax("http://" + server + "/krs/api/getReadyOrders.php")
         .done(function (returnData) {
-            displayOrders(returnData);
+            if (returnData.hasOwnProperty("notifications")) {
+                displayMessage(returnData.notifications[0]);
+
+            } else {
+                displayOrders(returnData);
+            }
 
         }).fail(function (returnData) {
         displayMessage(returnData.notifications[0]);
@@ -62,10 +78,26 @@ function hideButton(buttonID) {
     $('#button' + buttonID).hide();
 }
 
+function confirmPopup(orderId) {
+    $('#confirmMessage').html("Bestellung " + orderId + " löschen?");
+    $("#dialog-confirm").dialog({
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        buttons: {
+            "Löschen": function () {
+                removeOrder(orderId)
+                $(this).dialog("close");
+            },
+            'Abbruch': function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
+
 function removeOrder(orderID) {
-    if (confirm("Bestellung: "+orderID+" löschen?") != true) {
-        return;
-    }
 
     var postData = {
         'orderID': orderID,
@@ -104,9 +136,15 @@ function classToggle() {
 
 $(document).ready(function () {
     debug = false;
+    $('#divErrorMsg').hide();
+    $("#dialog-confirm").hide();
+
+    $('#btnErrorMsg').on('click', function () {
+        displayMessage('');
+    })
 
     $('.krsButton').on('click', function () {
-        removeOrder($(this).val());
+        confirmPopup($(this).val());
     })
     loadOrders();
     setInterval(classToggle, 1000);

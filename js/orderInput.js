@@ -1,6 +1,8 @@
-function displayMessage(notifications) {
+function displayMessage( notifications )
+{
     var msg;
-    switch (notifications.type.toLowerCase()) {
+    switch ( notifications.type.toLowerCase() )
+    {
         case "error":
             msg = "<span style='color: red'>";
             break;
@@ -8,78 +10,112 @@ function displayMessage(notifications) {
             msg = "<span style='color: darkgreen'>";
             break;
     }
-    msg += notifications.type + ": " + notifications.message + "</span>";
-    $('#message').html(msg);
+    msg += notifications.type.toUpperCase() + ": " + notifications.message + "</span>";
+    $( '#message' ).html( msg );
 }
 
-function addToOrderList(orderID) {
+function addToOrderList( orderID )
+{
 
     var date = new Date();
-    var newOrderListItem = document.createElement("li");
-    newOrderListItem.innerHTML = "<b>" + orderID + "</b> - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    $('#orderList').prepend(newOrderListItem);
+    var newOrderListItem = document.createElement( "li" );
+    var removed = '';
+    if ( orderID < 0 )
+    {
+        removed = 'GELÖSCHT ';
+        orderID = orderID * -1;
+    }
+    newOrderListItem.innerHTML = "<b>" + removed + orderID + "</b> - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    $( '#orderList' ).prepend( newOrderListItem );
 
-    if ($('#orderList li').length > 10) {
-        $('#orderList li').eq(10).remove();
+    if ( $( '#orderList li' ).length > 10 )
+    {
+        $( '#orderList li' ).eq( 10 ).remove();
     }
 
 }
 
-function newOrderID(keyPress) {
-    if (keyPress.keyCode >= 35 &&
+function newOrderID( keyPress )
+{
+    if ( keyPress.keyCode >= 35 &&
         keyPress.keyCode <= 39 ||
         keyPress.keyCode == 46 ||
-        keyPress.keyCode == 8) {
+        keyPress.keyCode == 8 )
+    {
         return;
     }
 
-    if ((keyPress.which < 48 || keyPress.which > 57) && keyPress.which != 45) {
+    if ( (keyPress.which < 48 || keyPress.which > 57) && keyPress.which != 45 )
+    {
         keyPress.preventDefault();
     }
 
-    if (keyPress.which != 13) {
+    if ( keyPress.which != 13 )
+    {
         return;
     }
 
-    if ($('#orderID').val().length == 0) {
+    if ( $( '#orderID' ).val().length == 0 )
+    {
         return;
     }
 
-    if ($('#orderID').val() < 1 || $('#orderID').val() > 9999) {
+    if ( $( '#orderID' ).val() > 9999 )
+    {
+        displayMessage( {
+            'type': 'error',
+            'message': 'Bestellnummer ' + $( '#orderID' ).val() + ' zu lang (max. 9999)' + '.'
+        } );
         return;
     }
 
     var postData = {
-        'orderID': $('#orderID').val(),
+        'orderID': $( '#orderID' ).val(),
         'debug': debug
     };
 
-    $.post("http://" + server + "/krs/api/saveNewOrder.php", postData, function (returnData) {
+    $.post( "http://" + server + "/krs/api/saveNewOrder.php", postData, function ( returnData )
+    {
 
-        if (returnData.hasOwnProperty("success")) {
+        if ( returnData.hasOwnProperty( "success" ) )
+        {
 
-            displayMessage({
+            var actionTXT = ' gespeichert';
+            var orderID = $( '#orderID' ).val();
+            if ( orderID < 0 )
+            {
+                actionTXT = ' GELÖSCHT ';
+                orderID = orderID * -1;
+            }
+
+            displayMessage( {
                 'type': 'Erfolg',
-                'message': 'Bestellung ' + $('#orderID').val() + ' gespeichert.'
-            });
+                'message': 'Bestellung ' + orderID + actionTXT + '.'
+            } );
 
-            addToOrderList($('#orderID').val());
-            $('#orderID').val("");
+            addToOrderList( $( '#orderID' ).val() );
+            $( '#orderID' ).val( "" );
 
-        } else if (returnData.hasOwnProperty("notifications")) {
-            displayMessage(returnData.notifications[0]);
         }
-    }).fail(function () {
+        else if ( returnData.hasOwnProperty( "notifications" ) )
+        {
+            displayMessage( returnData.notifications[ 0 ] );
+        }
+    } ).fail( function ()
+    {
 
-    }).always(function () {
+    } ).always( function ()
+    {
 
-    });
+    } );
 }
 
-$(document).ready(function () {
+$( document ).ready( function ()
+{
     debug = false;
 
-    $('#orderID').on('keypress', function (event) {
-        newOrderID(event);
-    });
-});
+    $( '#orderID' ).on( 'keypress', function ( event )
+    {
+        newOrderID( event );
+    } );
+} );

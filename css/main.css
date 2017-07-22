@@ -34,23 +34,6 @@
     background-color: #F44;
 }
 
-#orderListScreen
-{
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-    margin-left: 16em;
-    margin-top: 6em
-}
-
-#orderListScreen li
-{
-    font-size: 10em;
-    list-style: circle;
-    font-weight: bold;
-    font-family: verdana;
-}
-
 .krsLabelRed
 {
     color: #C00;
@@ -61,11 +44,31 @@
 {
 	font-size: 24px;
 	font-weight: bold;
-	
+    width: 300px;
 }
 
 .indexLink
 {
     font-weight: bold;
     font-size: 4rem;
+}
+
+#orderListScreen{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 14vh;
+    font-weight: bold;
+    font-family: verdana;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+#orderListScreen div{
+    background-color: white;
+}
+
+#bodyEingabe {
+    margin-left: 30vh;
 }
