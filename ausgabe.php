@@ -22,14 +22,13 @@
     <?php
     for( $x = 0; $x < 12; $x++ ) {
         echo "\t<div class='element-wrapper'>\n"
-            . "\t\t<button id='button" . $x . "' class='krsButton' value='" . $x . "'></button>\n"
+            . "\t\t<button id='button" . $x . "' class='btnOrder' value='" . $x . "'></button>\n"
             . "\t</div>\n";
     }
     ?>
 </div>
-<div id="dialog-confirm" title="Empty the recycle bin?">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span><span
-                id="confirmMessage"></span></p>
+<div id="dialog-confirm" title="Bestellung wirklich löschen?">
+    <p><span id="confirmMessage"></span></p>
 </div>
 </body>
 </html>

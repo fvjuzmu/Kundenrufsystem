@@ -17,7 +17,7 @@
     margin: 10px 0;
 }
 
-.krsButton {
+.btnOrder {
     width: 80%;
     height: 100px;
     margin: auto;
@@ -26,11 +26,11 @@
     min-width: 200px;
 }
 
-.krsButtonOrderID {
+.btnOrderIdText {
     font-size: 22pt;
 }
 
-.krsButtonRed {
+.btnOrderRed {
     background-color: #F44;
 }
 
@@ -56,7 +56,7 @@
     text-align: center;
     font-size: 14vh;
     font-weight: bold;
-    font-family: verdana;
+    font-family: verdana, serif;
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
     column-count: 2;
@@ -66,6 +66,6 @@
     background-color: white;
 }
 
-#bodyEingabe {
+#bodyInput {
     margin-left: 30vh;
 }

@@ -1,68 +1,71 @@
-function displayOrders(openOrders) {
+/**
+ * Loop over the received orders from the api call and display each of them
+ *
+ * @param openOrders {object[]}
+ */
+function displayOrders( openOrders )
+{
     var date = new Date();
 
-    for (var order = 0; order < 10; order++) {
+    for( var order = 0; order < 10; order++ )
+    {
+        var begin = new Date( openOrders[ order ].begin );
+        var timer = new Date( date - begin );
 
-        var begin = new Date(openOrders[order].begin);
-        var timer = new Date(date - begin);
-
-        addToOrderList(openOrders[order].nr, timer, begin);
-
+        addToOrderList( openOrders[ order ].nr, timer );
     }
 }
 
-function addToOrderList(orderID, timer, begin) {
-
-    var newOrderListItem = document.createElement("div");
+/**
+ * Add an order to the order list
+ *
+ * @param orderID {int}
+ * @param timer {Date}
+ */
+function addToOrderList( orderID, timer )
+{
+    var newOrderListItem = document.createElement( "div" );
     newOrderListItem.innerHTML = orderID;
     var minute = timer.getMinutes();
 
-    if (minute > 3)
+    $( newOrderListItem ).removeClass( "krsLabelRed" );
+    $( newOrderListItem ).removeClass( "overdue" );
+
+    if( minute > 3 && !$( newOrderListItem ).hasClass( "overdue" ) )
     {
-        newOrderListItem.className += " krsLabelRed"
+        $( newOrderListItem ).addClass( "krsLabelRed" );
+        $( newOrderListItem ).addClass( "overdue" );
     }
-    if (minute > 3 && !$(newOrderListItem).hasClass("overdue")) {
-        $(newOrderListItem).addClass("krsLabelRed");
-        $(newOrderListItem).addClass("overdue");
-    } else if (minute <= 3 && $(newOrderListItem).hasClass("overdue")) {
-        $(newOrderListItem).removeClass("krsLabelRed");
-        $(newOrderListItem).removeClass("overdue");
-    }
-    $('#orderListScreen').append(newOrderListItem);
 
+    $( '#orderListScreen' ).append( newOrderListItem );
 }
 
-function loadOrders() {
-
-    $.ajax("http://" + server + "/krs/api/getReadyOrders.php")
-        .done(function (returnData) {
-            $('#orderListScreen').empty();
-            displayOrders(returnData);
-
-        }).fail(function (returnData) {
-    }).always(function () {
-
-    });
+/**
+ * Call the getReadyorders API and display the received orders that are ready for pick up
+ */
+function loadOrders()
+{
+    $.ajax( "http://" + server + "/krs/api/getReadyOrders.php" ).done( function( returnData )
+    {
+        $( '#orderListScreen' ).empty();
+        displayOrders( returnData );
+    } );
 }
 
-function blink(selector) {
-    selector.fadeOut('slow', function () {
-        $(this).fadeIn('slow', function () {
-            blink(this);
-        });
-    });
-}
-
-function classToggle() {
-    $('.overdue').toggleClass('krsLabelRed');
+/**
+ * Toggle the colour of every lable that represents an overdue order (has the class .overdue)
+ */
+function lableToggleColour()
+{
+    $( '.overdue' ).toggleClass( 'krsLabelRed' );
 }
 
 
-$(document).ready(function () {
+$( document ).ready( function()
+{
     debug = false;
 
     loadOrders();
-    setInterval(classToggle, 1000);
-    setInterval(loadOrders, 2000);
-
-});
+    setInterval( lableToggleColour, 1000 );
+    setInterval( loadOrders, 2000 );
+} );

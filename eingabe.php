@@ -9,7 +9,7 @@
     <script src="js/serverIPAsJS.php" type="application/javascript"></script>
     <script src="js/orderInput.js" type="application/javascript"></script>
 </head>
-<body id="bodyEingabe">
+<body id="bodyInput">
 <div><h3 id="message">&nbsp;</h3></div>
 <br><br>
 <input id="orderID" type="number" min="1" max="5" step="1" autofocus="autofocus"/>
