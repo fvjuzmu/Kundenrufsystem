@@ -147,17 +147,18 @@ function newOrderID( keyPress )
         var orderIDField = $( '#orderID' );
         var orderID = orderIDField.val();
 
+
+        var dispMsg = 'Bestellung ' + orderID + ' gespeichert.';
         // but build a diverent message if the order ID was negative, this means the order was not added but removed
         if( orderID < 0 )
         {
-            actionTXT = ' GELÖSCHT ';
-            orderID = orderID * -1;
+            dispMsg = 'Bestellung ' + orderID * -1 + ' GELÖSCHT.';
         }
 
         // display the previously build message to the user
         displayMessage( {
             'type': 'Erfolg',
-            'message': 'Bestellung ' + orderID + actionTXT + '.'
+            'message': dispMsg
         } );
 
         // add the order ID to the displayed protocol list

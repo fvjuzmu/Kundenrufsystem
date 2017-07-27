@@ -8,21 +8,8 @@
     width: 100%;
 }
 
-.element-wrapper {
-    /*display: table-cell;*/
-    vertical-align: top;
-    display: inline-block;
-    min-width: 23%;
-    text-align: center;
-    margin: 10px 0;
-}
-
 .btnOrder {
-    width: 80%;
-    height: 100px;
-    margin: auto;
-    background: whitesmoke;
-    color: black;
+
     min-width: 200px;
 }
 
@@ -31,7 +18,7 @@
 }
 
 .btnOrderRed {
-    background-color: #F44;
+    background-color: #ffd8de;
 }
 
 .krsLabelRed {
@@ -68,4 +55,44 @@
 
 #bodyInput {
     margin-left: 30vh;
+}
+
+/******************/
+
+.orderOutTest {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 14vh;
+    font-weight: bold;
+    font-family: verdana, serif;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+.btnOrderIdText
+{
+    font-size: 10vh !important;
+}
+
+.orderOutTest button{
+    width: 100%;
+    min-height: 14vh;
+    font-size: 3vh;
+}
+
+@media (max-width: 200px){
+    .orderOutTest{
+        -webkit-columns: 1;
+        -moz-columns: 1;
+        column-count: 1;
+    }
+}
+@media (min-width: 201px){
+    .orderOutTest{
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        column-count: 2;
+    }
 }
