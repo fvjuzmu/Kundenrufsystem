@@ -18,10 +18,10 @@
 <br/>
 
 
-<div class="row">
+<div class="orderOutTest">
     <?php
     for( $x = 0; $x < 12; $x++ ) {
-        echo "\t<div class='element-wrapper'>\n"
+        echo "\t<div class=''>\n"
             . "\t\t<button id='button" . $x . "' class='btnOrder' value='" . $x . "'></button>\n"
             . "\t</div>\n";
     }
